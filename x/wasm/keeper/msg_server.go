@@ -24,6 +24,7 @@ func (m msgServer) StoreCode(goCtx context.Context, msg *types.MsgStoreCode) (*t
 		return nil, err
 	}
 	ctx := sdk.UnwrapSDKContext(goCtx)
+	ctx.Logger().Debug("StoreCode", "msg", msg)
 	senderAddr, err := sdk.AccAddressFromBech32(msg.Sender)
 	if err != nil {
 		return nil, sdkerrors.Wrap(err, "sender")
@@ -52,6 +53,7 @@ func (m msgServer) InstantiateContract(goCtx context.Context, msg *types.MsgInst
 		return nil, err
 	}
 	ctx := sdk.UnwrapSDKContext(goCtx)
+	ctx.Logger().Debug("InstantiateContract", "msg", msg)
 
 	senderAddr, err := sdk.AccAddressFromBech32(msg.Sender)
 	if err != nil {
@@ -87,6 +89,7 @@ func (m msgServer) InstantiateContract2(goCtx context.Context, msg *types.MsgIns
 		return nil, err
 	}
 	ctx := sdk.UnwrapSDKContext(goCtx)
+	ctx.Logger().Debug("InstantiateContract2", "msg", msg)
 
 	senderAddr, err := sdk.AccAddressFromBech32(msg.Sender)
 	if err != nil {
@@ -121,6 +124,7 @@ func (m msgServer) ExecuteContract(goCtx context.Context, msg *types.MsgExecuteC
 	}
 
 	ctx := sdk.UnwrapSDKContext(goCtx)
+	ctx.Logger().Debug("ExecuteContract", "msg", msg)
 	senderAddr, err := sdk.AccAddressFromBech32(msg.Sender)
 	if err != nil {
 		return nil, sdkerrors.Wrap(err, "sender")
@@ -152,6 +156,7 @@ func (m msgServer) MigrateContract(goCtx context.Context, msg *types.MsgMigrateC
 	}
 
 	ctx := sdk.UnwrapSDKContext(goCtx)
+	ctx.Logger().Debug("MigrateContract", "msg", msg)
 	senderAddr, err := sdk.AccAddressFromBech32(msg.Sender)
 	if err != nil {
 		return nil, sdkerrors.Wrap(err, "sender")
@@ -183,6 +188,7 @@ func (m msgServer) UpdateAdmin(goCtx context.Context, msg *types.MsgUpdateAdmin)
 	}
 
 	ctx := sdk.UnwrapSDKContext(goCtx)
+	ctx.Logger().Debug("UpdateAdmin", "msg", msg)
 	senderAddr, err := sdk.AccAddressFromBech32(msg.Sender)
 	if err != nil {
 		return nil, sdkerrors.Wrap(err, "sender")
@@ -215,6 +221,7 @@ func (m msgServer) ClearAdmin(goCtx context.Context, msg *types.MsgClearAdmin) (
 	}
 
 	ctx := sdk.UnwrapSDKContext(goCtx)
+	ctx.Logger().Debug("ClearAdmin", "msg", msg)
 	senderAddr, err := sdk.AccAddressFromBech32(msg.Sender)
 	if err != nil {
 		return nil, sdkerrors.Wrap(err, "sender")
@@ -243,6 +250,7 @@ func (m msgServer) UpdateInstantiateConfig(goCtx context.Context, msg *types.Msg
 	}
 
 	ctx := sdk.UnwrapSDKContext(goCtx)
+	ctx.Logger().Debug("UpdateInstantiateConfig", "msg", msg)
 	if err := m.keeper.SetAccessConfig(ctx, msg.CodeID, sdk.AccAddress(msg.Sender), *msg.NewInstantiatePermission); err != nil {
 		return nil, err
 	}
